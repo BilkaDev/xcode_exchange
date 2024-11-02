@@ -1,9 +1,8 @@
 package org.example.domain.currencyreceiver;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CurrencyRepository {
-    Currency save(Currency currency);
-
-    List<Currency> findAll();
+@Repository
+public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 }

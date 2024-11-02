@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class CurrencyReceiverFacadeTest {
-    private CurrencyReceiverFacade currencyReceiverFacade;
+    private CurrencyReceiver currencyReceiverFacade;
 
     @BeforeEach
     public void setUp() {
@@ -66,13 +66,14 @@ class CurrencyReceiverFacadeTest {
         // when
         List<RequestDetailsDto> requestsDto = currencyReceiverFacade.getRequests();
 
+        System.out.println(requestsDto);
         // then
         assertThat(requestsDto).isNotNull();
         assertThat(requestsDto.size()).isEqualTo(1);
-        assertThat(requestsDto.getFirst().name()).isEqualTo("Jan Nowak");
-        assertThat(requestsDto.getFirst().currency()).isEqualTo("EUR");
-        assertThat(requestsDto.getFirst().value()).isEqualTo("0.12345");
-        assertThat(requestsDto.getFirst().date())
+        assertThat(requestsDto.get(0).name()).isEqualTo("Jan Nowak");
+        assertThat(requestsDto.get(0).currency()).isEqualTo("EUR");
+        assertThat(requestsDto.get(0).value()).isEqualTo("0.12345");
+        assertThat(requestsDto.get(0).date())
                 .isEqualTo(LocalDateTime.of(2024, 11, 2, 10, 0, 0));
     }
 }

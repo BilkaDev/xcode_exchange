@@ -14,3 +14,12 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+xcode:
+  currency-receiver:
+    http:
+      client:
+        config:
+          uri: http://api.nbp.pl/api/exchangerates/tables/A?format=json
+          connectionTimeout: 5000
+          readTimeout: 5000

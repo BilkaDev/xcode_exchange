@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -20,11 +21,12 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 @SpringBootTest(classes = {XcodeApplication.class, IntegrationConfiguration.class})
 @ActiveProfiles("integration")
 @AutoConfigureMockMvc
+@Testcontainers
 public class BaseIntegrationTest {
     public static final String WIREMOCK_HOST = "http://localhost";
 
     @Autowired
-    MockMvc mockMvc;
+    public MockMvc mockMvc;
 
     @Autowired
     public AdjustableClock clock;
@@ -37,6 +39,7 @@ public class BaseIntegrationTest {
         registry.add("spring.datasource.url", mariadb::getJdbcUrl);
         registry.add("spring.datasource.username", mariadb::getUsername);
         registry.add("spring.datasource.password", mariadb::getPassword);
+        registry.add("xcode.currency-receiver.http.client.config.uri", () -> WIREMOCK_HOST + ":" + wireMockServer.getPort());
     }
 
     @RegisterExtension

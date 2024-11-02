@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table
 public class Currency {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String currency;
     private String name;

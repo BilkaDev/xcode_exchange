@@ -2,7 +2,7 @@ package org.example.domain.currencyreceiver;
 
 import java.time.Clock;
 
-public class CurrencyReceiverConfiguration {
+class CurrencyReceiverConfiguration {
 
     Clock clock() {
         return Clock.systemUTC();

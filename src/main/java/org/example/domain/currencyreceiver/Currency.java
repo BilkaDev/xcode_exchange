@@ -20,5 +20,6 @@ public class Currency {
     private String currency;
     private String name;
     private LocalDateTime date;
+    @Column(precision = 16, scale = 6)
     private BigDecimal value;
 }

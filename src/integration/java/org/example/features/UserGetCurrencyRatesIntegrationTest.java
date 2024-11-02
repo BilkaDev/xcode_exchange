@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -88,9 +89,30 @@ public class UserGetCurrencyRatesIntegrationTest extends BaseIntegrationTest {
 //        2. when user input GET /currencies/requests system returns status 200 and [{
 //                currency: ”EUR”,
 //        name: ”Jan Nowak”,
-//        date: “2022-01-01T10:00:00.000Z”,
+//        date: “2024-11-02T11:00:00.000Z”,
 //        value: 4.2954
 //}]
+        // given & when
+        ResultActions successGetCurrenciesRequests = mockMvc.perform(get("/currencies/requests")
+                .content("""
+                        {
+                        "name": "Jan Nowak",
+                        "currency": "THB"
+                        }
+                        """.trim())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
 
+        // then
+        successGetCurrenciesRequests
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        [{
+                            "currency": "THB",
+                            "name": "Jan Nowak",
+                            "date": "2024-11-02T11:00:00",
+                            "value": 0.1187
+                        }]
+                        """.trim()));
     }
 }

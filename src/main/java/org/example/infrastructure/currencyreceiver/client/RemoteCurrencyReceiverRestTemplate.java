@@ -29,17 +29,15 @@ public class RemoteCurrencyReceiverRestTemplate implements RemoteCurrencyReceive
         HttpHeaders headers = new HttpHeaders();
         final HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
         try {
-            System.out.println("TEST");
             final ResponseEntity<List<ExchangeRateTable>> response = makeGetRequest(requestEntity);
             response.getBody();
-            System.out.println("TEST");
             List<ExchangeRate> exchangeRates = getExchangeRates(response);
 
             Optional<Double> first = exchangeRates.stream()
                     .filter(exchangeRate -> exchangeRate.getCode().equals(currencyCommand.currency()))
                     .map(ExchangeRate::getMid)
                     .findFirst();
-            return first.map(BigDecimal::valueOf).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid currency code"));
+            return first.map(BigDecimal::valueOf).orElseThrow(IncorrectCurrencyException::new);
         } catch (ResourceAccessException | IllegalArgumentException e) {
             log.error("Error while fetching currency using http client: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);

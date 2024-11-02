@@ -5,6 +5,7 @@ import com.github.tomakehurst.wiremock.http.Fault;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.example.domain.currencyreceiver.RemoteCurrencyReceiver;
 import org.example.domain.currencyreceiver.dto.CurrencyCommandDto;
+import org.example.infrastructure.config.httpexceptions.HttpException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.web.server.ResponseStatusException;
@@ -206,7 +207,7 @@ public class RemoteCurrencyReceiverErrorIntegrationTest {
         Throwable throwable = catchThrowable(() -> remoteCurrencyReceiver.getCurrency(currencyCommand));
 
         // then
-        assertThat(throwable).isInstanceOf(ResponseStatusException.class);
-        assertThat(throwable.getMessage()).isEqualTo("400 BAD_REQUEST \"invalid currency code\"");
+        assertThat(throwable).isInstanceOf(HttpException.class);
+        assertThat(throwable.getMessage()).isEqualTo("invalid currency code");
     }
 }

@@ -1,0 +1,16 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/xcode?createDatabaseIfNotExist=true}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto=create-drop:
+        show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

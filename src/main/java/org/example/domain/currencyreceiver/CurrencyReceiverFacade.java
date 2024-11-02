@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
-public class CurrencyReceiverFacade {
+public class CurrencyReceiverFacade implements CurrencyReceiver{
     private final CurrencyRepository currencyRepository;
     private final RemoteCurrencyReceiver remoteCurrencyReceiver;
     private final Clock clock;

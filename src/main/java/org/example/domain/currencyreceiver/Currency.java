@@ -4,13 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
 public class Currency {
     private String currency;
     private String name;
-    private LocalDate date;
+    private LocalDateTime date;
     private BigDecimal value;
 }

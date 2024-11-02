@@ -1,8 +1,16 @@
 package org.example.domain.currencyreceiver;
 
+import java.time.Clock;
+
 public class CurrencyReceiverConfiguration {
-    public CurrencyReceiverFacade currencyReceiverFacade(
-            CurrencyRepository currencyRepository, RemoteCurrencyReceiver remoteCurrencyReceiver) {
-        return new CurrencyReceiverFacade(currencyRepository, remoteCurrencyReceiver);
+
+    Clock clock() {
+        return Clock.systemUTC();
+    }
+
+
+    CurrencyReceiverFacade currencyReceiverFacade(
+            CurrencyRepository currencyRepository, RemoteCurrencyReceiver remoteCurrencyReceiver, Clock clock) {
+        return new CurrencyReceiverFacade(currencyRepository, remoteCurrencyReceiver, clock);
     }
 }

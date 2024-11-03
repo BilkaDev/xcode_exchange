@@ -5,3 +5,9 @@ ENV
     DB_PASSWORD:password
     FE_DOMAIN_CORS:http://localhost
 ```
+
+## pre-launch application
+```
+docker-compose up -d
+
+```

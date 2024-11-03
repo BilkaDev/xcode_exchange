@@ -24,3 +24,5 @@ xcode:
           uri: http://api.nbp.pl/api/exchangerates/tables/A?format=json
           connectionTimeout: 5000
           readTimeout: 5000
+cors:
+  feDomain: ${FE_DOMAIN_CORS:http://localhost:4200}

@@ -1,0 +1,28 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/xcode?createDatabaseIfNotExist=true}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+xcode:
+  currency-receiver:
+    http:
+      client:
+        config:
+          uri: http://api.nbp.pl/api/exchangerates/tables/A?format=json
+          connectionTimeout: 5000
+          readTimeout: 5000
+cors:
+  feDomain: ${FE_DOMAIN_CORS:http://localhost:4200}

@@ -34,7 +34,7 @@ public class RemoteCurrencyReceiverRestTemplate implements RemoteCurrencyReceive
             List<ExchangeRate> exchangeRates = getExchangeRates(response);
 
             Optional<Double> first = exchangeRates.stream()
-                    .filter(exchangeRate -> exchangeRate.getCode().equals(currencyCommand.currency()))
+                    .filter(exchangeRate -> exchangeRate.getCode().equalsIgnoreCase(currencyCommand.currency()))
                     .map(ExchangeRate::getMid)
                     .findFirst();
             return first.map(BigDecimal::valueOf).orElseThrow(IncorrectCurrencyException::new);
